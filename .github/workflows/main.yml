@@ -1,6 +1,5 @@
 
-
-name: Deploy After Merge
+name: Lab Test Workflow
 
 on:
   push:
@@ -8,7 +7,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  test-lab:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +21,3 @@ jobs:
       - name: Show file content
         run: |
           cat test.txt
-
-      - name: Deploy
-        run: |
-          echo "Deploying..."

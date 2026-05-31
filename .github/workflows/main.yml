@@ -14,13 +14,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build application
+      - name: Prepare lab
         run: |
-          echo "Building project..."
-          npm install
-          npm run build
+          echo "Setting up lab environment..."
 
-      - name: Deploy to server
+      - name: Deploy
         run: |
           echo "Deploying..."
-

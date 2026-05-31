@@ -1,4 +1,5 @@
 
+
 name: Deploy After Merge
 
 on:
@@ -14,9 +15,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Prepare lab
+      - name: Create test file
         run: |
-          echo "Setting up lab environment..."
+          echo "hello lab" > test.txt
+
+      - name: Show file content
+        run: |
+          cat test.txt
 
       - name: Deploy
         run: |

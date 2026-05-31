@@ -1,5 +1,5 @@
 
-name: Lab Test Workflow
+name: SOC Lab Automation
 
 on:
   push:
@@ -7,17 +7,46 @@ on:
       - main
 
 jobs:
-  test-lab:
+  soc-lab:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create test file
+      # 🔹 Simulate activity (log creation)
+      - name: Generate test log
         run: |
-          echo "hello lab" > test.txt
+          echo "User login failed from 192.168.1.10" > security.log
+          echo "Suspicious file download detected" >> security.log
+          echo "Multiple login attempts detected" >> security.log
 
-      - name: Show file content
+      # 🔹 Display logs (like SOC monitoring)
+      - name: Show logs
         run: |
-          cat test.txt
+          cat security.log
+
+      # 🔹 Install security tool
+      - name: Install Nmap
+        run: |
+          sudo apt update
+          sudo apt install -y nmap
+
+      # 🔹 Simulate network scan
+      - name: Run network scan
+        run: |
+          nmap -F scanme.nmap.org > scan.txt
+
+      # 🔹 Show scan results
+      - name: Display scan results
+        run: |
+          cat scan.txt
+
+      # 🔹 Save results for download (VERY important)
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: soc-lab-results
+          path: |
+            scan.txt
+            security.log
